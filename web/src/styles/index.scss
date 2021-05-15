@@ -1,0 +1,57 @@
+@import "./base/variables";
+@import "./base/loader";
+
+body {
+  /* dom-variables */
+  --main-color: #{$main-color};
+  --maing-gradient-green: #{$main-gradient-green};
+  --maing-gradient-blue: #{$main-gradient};
+  --main-background: #{$main-background};
+  --main-background-forced: #{$main-background-forced};
+  --main-hidden-color: #{$main-hidden-color};
+  background: $main-background;
+}
+
+* {
+  user-select: none;
+  scrollbar-width: thin;
+  scrollbar-color: $main-color rgba(245, 245, 245, 0.041);
+  color: #ddd;
+  font-family: "Open Sans", "Roboto", sans-serif;
+  transition: 0.25s;
+}
+*::-webkit-scrollbar {
+  width: 5px;
+}
+*::-webkit-scrollbar-track {
+  background: rgba(245, 245, 245, 0.041);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $main-color;
+  border: 1px solid $main-background;
+}
+
+#home {
+  width: 100%;
+  .gradient-text {
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    &.green {
+      background-image: -webkit-linear-gradient(to right, $main-gradient-green);
+      background-image: linear-gradient(to right, $main-gradient-green);
+    }
+    &.blue {
+      background-image: -webkit-linear-gradient(to right, $main-gradient);
+      background-image: linear-gradient(to right, $main-gradient);
+    }
+  }
+  .number-subject {
+    color: $main-color;
+    font-size: 20px;
+    font-family: monospace;
+  }
+  #navbar {
+    background: $main-background-forced;
+  }
+}

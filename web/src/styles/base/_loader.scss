@@ -1,0 +1,17 @@
+#loader-screen {
+  .content {
+    text-align: center;
+    .logo {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &.fade-out {
+      transition-delay: 0.5s;
+      opacity: 0;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+	"name": "Melyon Theme",
+	"g_version": "0.1.3",
+	"features": [
+		"Both extensions are better for your eyes",
+		"There are good colors for the night time coding"
+	],
+    "repoGithub": "https://github.com/CA1R7/Melyon-website",
+	"versions": [
+		{
+			"name_color": "green",
+			"hex_color": "#08f677",
+			"gradient_css": [
+				"#11998e",
+				"#08f677"
+			],
+			"version": "0.1.3",
+			"preview_image": "https://camo.githubusercontent.com/1e6bd832d8d9cfd01dcd470564fdbe45cf8da0f933df3a0a39b5e87c29406f97/68747470733a2f2f692e696d6775722e636f6d2f376144335a59582e706e67"
+		},
+		{
+			"name_color": "blue",
+			"hex_color": "#25c6dc",
+			"gradient_css": [
+				"#25c6dc",
+				"#3e2a9a"
+			],
+			"version": "0.2.1",
+			"preview_image": "https://i.imgur.com/ykWQWY0.png"
+		}
+	]
+}
