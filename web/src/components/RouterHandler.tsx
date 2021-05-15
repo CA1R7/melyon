@@ -44,7 +44,9 @@ export const RouterHandler: FC = (): ReactElement => {
     const fetchData = () => {
       axios
         .request<ExtensionType>({
-          url: "/extension",
+          url: `${
+            typeof process.env.ENDPOINT === "string" ? process.env.ENDPOINT : ""
+          }/extension`,
           method: "GET",
         })
         .then((data) => {
