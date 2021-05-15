@@ -36,7 +36,7 @@ export interface ExtensionType {
 }
 
 const ENDPOINT: string =
-  process.env.NODE_ENV !== "production"
+  process.env.NODE_ENV === "production"
     ? "https://api.melyon.tech"
     : "http://localhost:8080";
 
