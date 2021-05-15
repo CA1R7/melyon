@@ -1,13 +1,52 @@
-{
+{  
   "name": "melyon",
-  "version": "0.1.1",
+  "displayName": "Melyon Theme",
+  "description": "a dark green-theme for vscode",
+  "version": "0.1.4",
+  "publisher": "cair71",
+  "icon": "web/src/assets/melyon-logo-v2.png",
+  "repository": "https://github.com/CA1R7/melyon.git",
   "scripts": {
     "dev": "concurrently \"yarn run start:web\" \"yarn run start:api\"",
     "web": "cd ./web && yarn start",
     "api": "cd ./api && yarn start"
   },
-  "author": "cair71",
-  "license": "MIT",
+  "author": {
+    "name": "cair71",
+    "email": "cairzz222@gmail.com"
+  },
+  "galleryBanner": {
+    "color": "#171c28",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.19.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "Themes",
+    "Dark Theme",
+    "color-theme"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Melyon",
+        "uiTheme": "vs-dark",
+        "path": "./themes/melyon-dark-theme-green.json",
+        "version": "0.1.3"
+      },
+      {
+        "label": "Melyon blue",
+        "uiTheme": "vs-dark",
+        "path": "./themes/melyon-dark-theme-blue.json",
+        "version": "0.2.1"
+      }
+    ]
+  }
+  "license": "Apcahe 2.0",
   "private": false,
   "devDependencies": {
     "concurrently": "^6.0.2"
