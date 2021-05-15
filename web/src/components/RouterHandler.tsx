@@ -35,6 +35,11 @@ export interface ExtensionType {
   [key: string]: any; // eslint-disable-line
 }
 
+const ENDPOINT: string =
+  process.env.NODE_ENV !== "production"
+    ? "https://api.melyon.tech"
+    : "http://localhost:8080";
+
 export const RouterHandler: FC = (): ReactElement => {
   const dispatch = useDispatch<Dispatch<RoutersHandlerState>>();
   const { loaderScreen } = useSelector<StateInterface, RoutersHandlerState>(
@@ -42,11 +47,10 @@ export const RouterHandler: FC = (): ReactElement => {
   );
   useEffect(() => {
     const fetchData = () => {
+      console.log(`CLIENT: Trying to fetch: ${ENDPOINT}`);
       axios
         .request<ExtensionType>({
-          url: `${
-            typeof process.env.ENDPOINT === "string" ? process.env.ENDPOINT : ""
-          }/extension`,
+          url: `${ENDPOINT}/extension`,
           method: "GET",
         })
         .then((data) => {
