@@ -45,7 +45,7 @@
         "version": "0.2.1"
       }
     ]
-  }
+  },
   "license": "Apcahe 2.0",
   "private": false,
   "devDependencies": {
