@@ -21,11 +21,14 @@ export const Home: FC = () => {
   };
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-  }, []);
+    return () => {
+      document.removeEventListener("scroll", handleScroll);
+    };
+  });
   if (!extension) return null;
   return (
     <div id="home">
-      <Navbar isVisible={scrolledToTop} extension={extension}/>
+      <Navbar isVisible={scrolledToTop} extension={extension} />
       <ThemeContainer extension={extension} colorTheme={colorTheme} />
       <Footer />
     </div>
