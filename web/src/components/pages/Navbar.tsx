@@ -53,7 +53,7 @@ const GithubLogo = styled.div<ImageAttr>`
 `;
 
 const redirecttoRepo = (url: string): void => {
-  (window as any).open(url); //eslint-disable-line
+  window.open(url);
 };
 
 export const Navbar: FC<NavbarType> = ({ isVisible = true, extension }) => {
