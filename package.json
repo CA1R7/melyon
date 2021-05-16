@@ -46,7 +46,7 @@
       }
     ]
   },
-  "license": "Apcahe 2.0",
+  "license": "Apache-2.0",
   "private": false,
   "devDependencies": {
     "concurrently": "^6.0.2"
