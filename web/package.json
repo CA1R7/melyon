@@ -1,8 +1,7 @@
 {
   "name": "@melyon/web",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
-  "proxy": "http://localhost:8080",
   "author": "cair71 <me@cair71.codes>",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
