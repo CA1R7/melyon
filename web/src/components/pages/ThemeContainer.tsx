@@ -201,11 +201,7 @@ export const ThemeContainer: FC<ThemeContainerProps> = ({
               {...color}
             >
               <div className="border">
-                <div
-                  className={`name-color gradient-text ${
-                    color.name_color === "green" ? " green" : " blue"
-                  }`}
-                >
+                <div className={`name-color gradient-text ${color.name_color}`}>
                   {color.name_color}
                 </div>
               </div>
