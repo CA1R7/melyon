@@ -132,15 +132,15 @@ export const ThemeContainer: FC<ThemeContainerProps> = ({
     <ThemeContainerStyled id="theme-container">
       <div className="number-subject gradient-text">01.</div>
       <div className="title-subject">
-        {extension.name
-          .split(/\s/)
-          .map((text: string, i: number) =>
-            i > 0 ? (
-              <span className="gradient-text blue">{text}</span>
-            ) : (
-              <>{text}</>
-            )
-          )}
+        {extension.name.split(/\s/).map((text: string, i: number) =>
+          i > 0 ? (
+            <span key={i} className="gradient-text blue">
+              {text}
+            </span>
+          ) : (
+            <span key={i}>{text}</span>
+          )
+        )}
       </div>
       <div className="decription-subject">
         A dark theme for <span onClick={() => redirectToVSCode()}>vscode</span>
