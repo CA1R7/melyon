@@ -1,5 +1,3 @@
 {
-    "recommendations": [
-        "cair71.melyon-vscode"
-    ]
+  "recommendations": ["cair71.melyon-vscode", "esbenp.prettier-vscode"]
 }
