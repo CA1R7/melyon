@@ -114,7 +114,7 @@ export const ThemeContainer: FC<ThemeContainerProps> = ({
 }) => {
   const dispatch = useDispatch<Dispatch<HomeState>>();
   const redirectToVSCode = (): void => {
-    window.open("https://code.visualstudio.com"); // eslint-disable-line
+    window.open("https://code.visualstudio.com");
   };
   const colorState: ColorType =
     extension.versions[typeof colorTheme !== "undefined" ? colorTheme : 0];
