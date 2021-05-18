@@ -17,7 +17,7 @@ export const store = createStore(
 export type StateInterface = ReturnType<typeof store.getState>;
 
 export interface Action<T = string> {
-  type: "UPDATE_ROUTER_HANDLER" | "UPDATE_HOME_STATE";
+  type: "UPDATE_ROUTER_HANDLER" | "UPDATE_HOME_STATE" | "UPDATE_LOADER_STATE";
   payload: Partial<T>;
 }
 
