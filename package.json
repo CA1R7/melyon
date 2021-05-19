@@ -7,7 +7,7 @@
   "icon": "web/src/assets/melyon-logo-v2.png",
   "repository": "https://github.com/CA1R7/melyon.git",
   "scripts": {
-    "dev": "concurrently \"yarn run start:web\" \"yarn run start:api\"",
+    "dev": "concurrently \"yarn run web\" \"yarn run api\"",
     "web": "cd ./web && yarn start",
     "api": "cd ./api && yarn start"
   },
