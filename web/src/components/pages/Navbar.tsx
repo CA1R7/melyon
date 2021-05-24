@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 import staticImage from "../../assets/melyon-static.svg";
-import github from "../../assets/github.svg";
 import { ExtensionType } from "../RouterHandler";
 
 export interface NavPropsStyleType {
@@ -36,34 +35,44 @@ const LogoImage = styled.div<ImageAttr>`
   background: url(${(theme) => theme.url}) no-repeat;
   width: 40px;
   height: 40px;
-  margin: 5px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-const GithubLogo = styled.div<ImageAttr>`
-  background-color: #fff;
-  background: url(${(theme) => theme.url}) no-repeat;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  cursor: pointer;
+  margin: 10px;
 `;
 
-const redirecttoRepo = (url: string): void => {
-  window.open(url);
-};
+const Links = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  .link {
+    width: auto;
+    margin: 5px;
+    display: inline-block;
+    padding: 7px 10px;
+    text-align: center;
+    background: var(--main-white-transparent);
+    cursor: pointer;
+    border-radius: 5px;
+    &:hover {
+      background: var(--main-white-transparent-hoved);
+    }
+  }
+`;
 
 export const Navbar: FC<NavbarType> = ({ isVisible = true, extension }) => {
   return (
     <NavBarStyle id="navbar" isVisible={isVisible}>
       <LogoImage url={staticImage} />
-      <GithubLogo
-        url={github}
-        onClick={() => redirecttoRepo(extension.repoGithub)}
-      />
+      <Links>
+        {extension.links.map((link, i) => (
+          <div
+            key={i}
+            title={link.name}
+            className="link"
+            onClick={() => window.open(link.href)}
+          >
+            <i className={link.ico} />
+          </div>
+        ))}
+      </Links>
     </NavBarStyle>
   );
 };
