@@ -9,6 +9,9 @@ body {
   --main-background: #{$main-background};
   --main-background-forced: #{$main-background-forced};
   --main-hidden-color: #{$main-hidden-color};
+  --main-white-transparent: #{$main-white-transparent};
+  --main-white-transparent-hoved: #{$main-white-transparent-hoved};
+  --main-black-transparent: #{$main-black-transparent};
   background: $main-background;
 }
 
@@ -16,7 +19,8 @@ body {
   user-select: none;
   scrollbar-width: thin;
   scrollbar-color: $main-color rgba(245, 245, 245, 0.041);
-  color: #ddd;
+  color: $main-primary-color;
+  fill: $main-primary-color;
   font-family: "Open Sans", "Roboto", sans-serif;
   transition: 0.25s;
 }
@@ -32,8 +36,12 @@ body {
   border: 1px solid $main-background;
 }
 
-#home {
-  width: 100%;
+#g-container {
+  position: relative;
+  width: calc(100% - 200px);
+  height: 100%;
+  margin: 0 auto;
+
   .gradient-text {
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -50,8 +58,5 @@ body {
     color: $main-color;
     font-size: 20px;
     font-family: monospace;
-  }
-  #navbar {
-    background: $main-background-forced;
   }
 }
