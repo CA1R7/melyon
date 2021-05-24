@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, Suspense, useEffect } from "react";
+import React, { FC, ReactElement, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route, RouteProps } from "react-router-dom";
@@ -15,6 +15,12 @@ const routes: RouteProps[] = [
   },
 ];
 
+export interface LinkType {
+  name: string;
+  ico: string;
+  href: string;
+}
+
 export interface ColorType {
   name_color: string;
   hex_color: string;
@@ -28,8 +34,11 @@ export interface ExtensionType {
   status?: boolean;
   code?: number;
   name: string;
+  extension_pub: string;
+  badges: string[];
   g_version: string | number;
   versions: ColorType[];
+  links: LinkType[];
   features: string[];
   repoGithub: string;
   [key: string]: any; // eslint-disable-line
@@ -74,19 +83,14 @@ export const RouterHandler: FC = (): ReactElement => {
     };
     fetchData();
   }, [dispatch]);
+  if (loaderScreen === true) return <Loader />;
   return (
     <BrowserRouter>
-      {loaderScreen === true ? (
-        <Loader />
-      ) : (
-        <Suspense fallback={<Loader />}>
-          <Switch>
-            {routes.map((route, i) => (
-              <Route {...route} key={`route-${i}`} />
-            ))}
-          </Switch>
-        </Suspense>
-      )}
+      <Switch>
+        {routes.map((route, i) => (
+          <Route {...route} key={`route-${i}`} />
+        ))}
+      </Switch>
     </BrowserRouter>
   );
 };
