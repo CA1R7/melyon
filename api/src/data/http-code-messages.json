@@ -1,10 +1,10 @@
 [
-	{
-		"code": 404,
-		"message": "Not Found"
-	},
-	{
-		"code": 505,
-		"message": "Something went wrong"
-	}
+  {
+    "code": 404,
+    "message": "Not Found"
+  },
+  {
+    "code": 505,
+    "message": "Something went wrong"
+  }
 ]
