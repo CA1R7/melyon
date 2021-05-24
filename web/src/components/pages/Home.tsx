@@ -10,6 +10,7 @@ import { RoutersHandlerState } from "../../redux/reducers/general/router-handler
 
 export const Home: FC = () => {
   const [scrolledToTop, setScrolledToTop] = useState(true);
+  const [lastConatainerScrolled, setLastConatainerScrolled] = useState(false);
   const { colorTheme } = useSelector<StateInterface, HomeState>(
     (state) => state.home
   );
@@ -18,6 +19,9 @@ export const Home: FC = () => {
   );
   const handleScroll = () => {
     setScrolledToTop(window.pageYOffset < 50);
+    setLastConatainerScrolled(
+      window.pageYOffset >= Math.abs(document.body.offsetHeight / 2)
+    );
   };
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -27,9 +31,14 @@ export const Home: FC = () => {
   });
   if (!extension) return null;
   return (
-    <div id="home">
+    <div id="g-container">
       <Navbar isVisible={scrolledToTop} extension={extension} />
-      <ThemeContainer extension={extension} colorTheme={colorTheme} />
+      <ThemeContainer
+        mouseDown={scrolledToTop}
+        extension={extension}
+        colorTheme={colorTheme}
+        lastContainerScrolled={lastConatainerScrolled}
+      />
       <Footer />
     </div>
   );
