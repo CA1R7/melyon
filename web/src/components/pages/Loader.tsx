@@ -37,7 +37,7 @@ export const Loader: FC = (): ReactElement => {
       dispatch({
         type: "UPDATE_LOADER_STATE",
         payload: {
-          troubleMessage: "⚠ A connection trouble",
+          troubleMessage: "connection trouble",
         },
       });
     }, 3000 * 2);
