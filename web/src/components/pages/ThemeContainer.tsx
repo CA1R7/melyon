@@ -1,121 +1,137 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "../../redux";
 import { HomeState } from "../../redux/reducers/general/home";
 import styled from "styled-components";
 import { ExtensionType, ColorType } from "../RouterHandler";
 
-const ThemeContainerStyled = styled.div`
-  margin: 100px 10px;
-  .number-subject {
-    margin: 10px 0;
+export interface ThemeContainerProps {
+  extension: ExtensionType;
+  lastContainerScrolled: boolean;
+  colorTheme: number | undefined;
+  mouseDown: boolean;
+}
+const Container = styled.div<{
+  firstContainer?: boolean;
+  imgPreview?: string;
+  heightContainer?: number;
+  scrolled?: boolean;
+}>`
+  ${
+    ({ firstContainer }) => (firstContainer ? `margin: 100px 50px;text-align: center;` : "") /* prettier-ignore*/
   }
-  .title-subject {
-    font-size: 50px;
+  position: relative;
+  height: ${({ heightContainer }) =>
+    heightContainer && heightContainer - 200}px;
+  .mouse-down {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
   }
-  a {
+  .title-xall > span {
+    font-size: 60px;
+    font-family: Calibri, sans-serif;
+    font-weight: 400;
+    animation-name: fadeIn;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 1.5s;
+  }
+  .description {
+    font-size: 16px;
     margin: 5px;
-  }
-  .decription-subject {
-    color: var(--main-hidden-color);
-    margin: 5px 0 10px 5px;
-    span {
-      cursor: pointer;
-      color: rgb(37, 198, 220);
+    color: var(--main-gidden-color);
+    &.box {
+      position: relative;
+      padding: 20px;
+      background: var(--main-background-forced);
+      border-radius: 4px;
+      box-shadow: 5px 5px 10px var(--main-black-transparent);
+      margin: 10px;
+      z-index: 9999;
     }
   }
-  .cl {
-    .title {
-      font-size: 13px;
-      color: var(--main-hidden-color);
+  .content {
+    position: relative;
+    width: 100%;
+    .left-side {
+      width: 40%;
+      float: left;
+      .hr {
+        width: 80%;
+        height: 2px;
+        background: var(--main-background-forced);
+        margin: 10px;
+      }
+      .labels {
+        margin: 0 5px;
+        span {
+          margin: 5px;
+          padding: 2px 15px;
+          font-size: 13px;
+          border-radius: 20px;
+          cursor: pointer;
+          margin-left: 20px;
+          ${({ scrolled }) =>
+            scrolled
+              ? "opacity:1;margin-left: 5px;"
+              : "opacity: 0;margin-left: -10px;"}
+        }
+      }
+      .features {
+        .title {
+          font-size: 15px;
+          margin: 0 10px;
+        }
+        ul {
+          li {
+            ${({ scrolled }) => (scrolled ? "opacity:1;" : "opacity: 0;")}
+            font-size: 15px;
+          }
+        }
+        .button-to-the-market {
+          width: 150px;
+          margin: 10px;
+          padding: 10px;
+          background: var(--main-white-transparent);
+          border-radius: 50px;
+          text-align: center;
+          cursor: pointer;
+          &:hover {
+            background: var(--main-white-transparent-hoved);
+          }
+        }
+      }
     }
-  }
-  .features,
-  .colors-available {
-    margin: 20px 10px;
-    ul div li {
-      list-style-type: square;
+    .right-side {
+      width: 35%;
+      float: left;
+      border-left: 1px solid var(--main-background-forced);
+      .img-box {
+        margin: 0 10px;
+        border-radius: 10px;
+        width: 600px;
+        background: #fff;
+        float: left;
+        background: url(${({ imgPreview }) => imgPreview}) no-repeat;
+        ${({ scrolled }) =>
+          scrolled
+            ? "opacity:1;margin-left: 10px;"
+            : "opacity: 0;margin-left: 20px;"}
+      }
     }
   }
 `;
 
-const ColorButton = styled.div<ColorType & { isVisible: boolean }>`
-  display: inline-block;
-  margin: 10px 5px;
-  padding: 1px;
-  border: 1px solid ${(theme) => (theme.isVisible ? "#fff" : "transparent")};
-  background: linear-gradient(
-    50deg,
-    ${(theme) => theme.gradient_css.join(",")}
-  );
-  cursor: pointer;
-  position: relative;
-  &,
-  .border {
-    border-radius: 20px;
-  }
-  .border {
-    padding: 5px 15px;
-    width: calc(100% - ${15 * 2}px);
-    height: 100%;
-    background: var(--main-background);
-  }
-`;
-const ColorDetails = styled.div<ColorType>`
-  .line-text {
-    margin: 3px 10px;
-    div {
-      display: inline-block;
-    }
-    .detail-title {
-      background: linear-gradient(
-        50deg,
-        ${(color) => color.gradient_css.join(",")}
-      );
-    }
-    .answer {
-      margin: 0 5px;
-      width: auto;
-      font-family: monospace;
-      background: rgb(255, 255, 255, 8%);
-      border-radius: 5px;
-      padding: 2px 5px;
-    }
-  }
-`;
-const ImagePreview = styled.div`
-  width: 50%;
-  position: absolute;
-  right: 50px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: flex-end;
-  img {
-    &.preview-image {
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 5px 5px 20px rgb(0, 0, 0, 38%);
-    }
-  }
-  @media (max-width: 1000px) {
-    img {
-      display: none;
-    }
-  }
-`;
-export interface ThemeContainerProps {
-  extension: ExtensionType;
-  colorTheme: number | undefined;
-}
 export const ThemeContainer: FC<ThemeContainerProps> = ({
   extension,
   colorTheme,
+  lastContainerScrolled,
+  mouseDown,
 }) => {
+  const [SHeightContainer, setHeightContainer] = useState(0);
   const dispatch = useDispatch<Dispatch<HomeState>>();
-  const redirectToVSCode = (): void => {
-    window.open("https://code.visualstudio.com");
-  };
   const colorState: ColorType =
     extension.versions[typeof colorTheme !== "undefined" ? colorTheme : 0];
   const chnageColor = (color: number) => {
@@ -128,98 +144,88 @@ export const ThemeContainer: FC<ThemeContainerProps> = ({
       });
     }
   };
+  const redirectMarketPlace = () => {
+    window.open(
+      "https://marketplace.visualstudio.com/items?itemName=cair71.melyon-vscode"
+    );
+  };
+  useEffect(() => {
+    setHeightContainer(window.screen.height);
+  }, [setHeightContainer]);
   return (
-    <ThemeContainerStyled id="theme-container">
-      <div className="number-subject gradient-text">01.</div>
-      <div className="title-subject">
-        {extension.name.split(/\s/).map((text: string, i: number) =>
-          i > 0 ? (
-            <span key={i} className="gradient-text blue">
-              {text}
-            </span>
-          ) : (
-            <span key={i}>{text}</span>
-          )
-        )}
-      </div>
-      <div className="decription-subject">
-        A dark theme for <span onClick={() => redirectToVSCode()}>vscode</span>
-      </div>
-      <a href="https://marketplace.visualstudio.com/items?itemName=cair71.melyon-vscodee">
-        <img
-          alt="Version"
-          src="https://vsmarketplacebadge.apphb.com/version/cair71.melyon-vscode.svg"
-        />
-      </a>
-      <a href="https://marketplace.visualstudio.com/items?itemName=cair71.melyon-vscode">
-        <img
-          alt="Downloads"
-          src="https://vsmarketplacebadge.apphb.com/downloads/cair71.melyon-vscode.svg"
-        />
-      </a>
-      <a href="https://marketplace.visualstudio.com/items?itemName=cair71.melyon-vscode">
-        <img
-          alt="Installs"
-          src="https://vsmarketplacebadge.apphb.com/installs/cair71.melyon-vscode.svg"
-        />
-      </a>
-      <div className="features cl">
-        <div className="title">Extension features :</div>
-        <ul>
-          {extension.features.map((feature: string, i: number) => (
-            <div key={i}>
-              <li className={"gradient-text blue"}>{feature}</li>
-            </div>
-          ))}
-        </ul>
-      </div>
-      <div className="colors-available cl">
-        <div className="title">Colors details :</div>
-        <ColorDetails {...colorState}>
-          {Object.keys(colorState).map((color: string, i: number) => {
-            if (color === "preview_image") return null;
-            return (
-              <div key={i} className="line-text">
-                <div className="detail-title gradient-text">{color}</div>
-                <span className="answer">
-                  {color === "gradient_css"
-                    ? `gradient(${colorState[color].join(",")})`
-                    : colorState[color]}
-                </span>
-              </div>
-            );
-          })}
-        </ColorDetails>
-        <div className="colors-wrap"></div>
-        <div className="title">Currently colors :</div>
-        <div className="content-buttons">
-          {extension.versions.map((color, i: number) => (
-            <ColorButton
-              onClick={() => chnageColor(i)}
+    <>
+      <Container firstContainer={true} heightContainer={SHeightContainer}>
+        <div className="title-xall">
+          <span className="gradient-text blue">Melyon</span> <span>Theme</span>
+        </div>
+        <div className="description">A dark theme for visual studio code</div>
+
+        <div className="svgs">
+          {extension.badges.map((badge, i) => (
+            <a
               key={i}
-              isVisible={colorTheme === i}
-              {...color}
+              href={`#${badge}`}
+              onClick={() => redirectMarketPlace()}
+              style={{ margin: "5px" }}
             >
-              <div className="border">
-                <div className={`name-color gradient-text ${color.name_color}`}>
-                  {color.name_color}
-                </div>
-              </div>
-            </ColorButton>
+              <img
+                alt={badge}
+                src={`https://vsmarketplacebadge.apphb.com/${badge}/cair71.melyon-vscode.svg`}
+              />
+            </a>
           ))}
         </div>
-      </div>
-      <ImagePreview>
-        <img
-          className="preview-image"
-          src={
-            typeof colorTheme === "number"
-              ? extension.versions[colorTheme].preview_image
-              : ""
-          }
-          alt="melyon"
-        />
-      </ImagePreview>
-    </ThemeContainerStyled>
+        {mouseDown ? <div className="mouse-down">🔻 GO DOWN 🔻</div> : null}
+      </Container>
+      <Container
+        heightContainer={SHeightContainer}
+        scrolled={lastContainerScrolled}
+      >
+        <div className="number-subject">.01</div>
+        <div className="title-xall">
+          <span>Theme</span>
+        </div>
+        <div className="content">
+          <div className="left-side">
+            <div className="hr"></div>
+            <div className="labels">
+              {extension.versions.map((label, i) => (
+                <span
+                  key={i}
+                  onClick={() => chnageColor(i)}
+                  style={{
+                    color: label.hex_color,
+                    border: `1px solid ${label.hex_color}`,
+                  }}
+                >
+                  {label.name_color}
+                </span>
+              ))}
+            </div>
+            <div className="description box">
+              A dark theme for vs code, Designed for night time coding.
+            </div>
+            <div className="features">
+              <div className="title">Features :</div>
+              <ul>
+                {extension.features.map((fueature, i) => (
+                  <li key={i}>{fueature}</li>
+                ))}
+              </ul>
+              <div className="title">Links :</div>
+              <div
+                className="button-to-the-market"
+                onClick={() => redirectMarketPlace()}
+              >
+                Marketplace
+              </div>
+            </div>
+          </div>
+          <div className="right-side">
+            <img className="img-box" src={colorState.preview_image}></img>
+          </div>
+        </div>
+      </Container>
+    </>
   );
 };
