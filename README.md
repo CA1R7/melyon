@@ -1,7 +1,7 @@
 # Melyon Theme Website
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d7c87f41-3ff7-423d-8e01-de9e388d3a81/deploy-status)](https://app.netlify.com/sites/gallant-stonebraker-9cfac2/deploys)
 [![DeepScan grade](https://deepscan.io/api/teams/14105/projects/17197/branches/387067/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=14105&pid=17197&bid=387067)
-<a href="https://marketplace.visualstudio.com/items?itemName=cair71.melyon-vscodee">
+<a href="https://marketplace.visualstudio.com/items?itemName=cair71.melyon-vscode">
   <img alt="Version" src="https://vsmarketplacebadge.apphb.com/version/cair71.melyon-vscode.svg" />
 </a>
 <a href="https://marketplace.visualstudio.com/items?itemName=cair71.melyon-vscode">
@@ -10,9 +10,15 @@
 <a href="https://marketplace.visualstudio.com/items?itemName=cair71.melyon-vscode">
   <img alt="Installs" src="https://vsmarketplacebadge.apphb.com/installs/cair71.melyon-vscode.svg" />
 </a>
+<a href="https://marketplace.visualstudio.com/items?itemName=cair71.melyon-vscode">
+  <img alt="Installs" src="https://vsmarketplacebadge.apphb.com/rating-star/cair71.melyon-vscode.svg" />
+</a>
 
 A website for <a href="https://melyon.tech/">Melyon theme</a> of vscode, It's dark theme which contains colors for better coding on nighttime ❤✨
-
+# Installation
+```
+yarn
+```
 # Usage
 
 Install the dependencies then run commands bellow :
@@ -34,7 +40,9 @@ Or `api` :
 ```
 yarn api
 ```
-
+---
+## Make sure you have
+  - yarn latest version
 # Servers
 
 | server | default-port | URL local               | URL production            |
