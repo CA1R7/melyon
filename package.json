@@ -1,7 +1,7 @@
-{  
+{
   "name": "melyon",
   "displayName": "Melyon Theme",
-  "description": "a dark green-theme for vscode",
+  "description": "a dark theme for vscode",
   "version": "0.1.4",
   "publisher": "cair71",
   "icon": "web/src/assets/melyon-logo-v2.png",
@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "concurrently \"yarn run web\" \"yarn run api\"",
     "web": "cd ./web && yarn start",
-    "api": "cd ./api && yarn start"
+    "api": "cd ./api && yarn dev"
   },
   "author": {
     "name": "cair71",
