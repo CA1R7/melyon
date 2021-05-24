@@ -2,18 +2,18 @@
   main<index> - routes
 */
 
-import express, { Router, Request, Response } from "express"
-import { catchReponseMessage } from "../utils/catchResponse"
+import express, { Request, Response, Router } from "express";
+import { catchReponseMessage } from "../utils/catchResponse";
 
-import { extension } from "./versions"
+import { extension } from "./versions";
 
-const router: Router = express.Router()
+const router: Router = express.Router();
 
-router.get("/extension", extension)
+router.get("/extension", extension);
 
 router.use("*", (_req: Request, res: Response) => {
-	const code = 404
-	res.json(catchReponseMessage({ code }))
-})
+  const code = 404;
+  res.json(catchReponseMessage({ code }));
+});
 
-export default router
+export default router;
