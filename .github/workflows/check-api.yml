@@ -1,6 +1,10 @@
 name: "Api Checks"
 
 on:
+  push:
+    paths:
+      - ".github/workflows/check-api.yml"
+      - "api/**"
   pull_request:
     paths:
       - ".github/workflows/check-api.yml"
