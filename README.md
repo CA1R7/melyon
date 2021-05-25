@@ -19,6 +19,13 @@ A website for <a href="https://melyon.tech/">Melyon theme</a> of vscode, It's da
 ```
 yarn
 ```
+
+# Theme Instalation
+
+1. Go to extensions button or to <a href="https://marketplace.visualstudio.com/items?itemName=cair71.melyon-vscode">Marketplace vscode</a>.
+2. Click on Install button.
+3. Then select Melyon theme from `File > Preferences > Color Theme > (Melyon or Melyon Blue)`.
+
 # Usage
 
 Install the dependencies then run commands bellow :
@@ -51,4 +58,4 @@ yarn api
 
 # License
 
-Copyright (c) 2021 Melyon Licensed under the Apcahe 2.0 license.
+Copyright (c) 2021 CA1R71 Licensed under the Apcahe 2.0 license.
