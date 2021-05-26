@@ -18,9 +18,10 @@ export const Home: FC = () => {
     (state) => state.routersHandler
   );
   const handleScroll = () => {
+    const fullHeightScreen = document.body.offsetHeight;
     setScrolledToTop(window.pageYOffset < 50);
     setLastConatainerScrolled(
-      window.pageYOffset >= Math.abs(document.body.offsetHeight / 2)
+      window.pageYOffset >= Math.abs(fullHeightScreen / 2 - 100)
     );
   };
   useEffect(() => {
