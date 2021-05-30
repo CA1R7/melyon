@@ -6,6 +6,7 @@ import { RoutersHandlerState } from "../redux/reducers/general/router-handler";
 import { StateInterface, Dispatch } from "../redux";
 import { Loader } from "./pages/Loader";
 import { Home } from "./pages/Home";
+import { LoaderState } from "../redux/reducers/general/loader";
 
 const routes: RouteProps[] = [
   {
@@ -50,38 +51,45 @@ const ENDPOINT: string =
     : "http://localhost:8080";
 
 export const RouterHandler: FC = (): ReactElement => {
-  const dispatch = useDispatch<Dispatch<RoutersHandlerState>>();
+  const dispatch = useDispatch<Dispatch<RoutersHandlerState & LoaderState>>();
   const { loaderScreen } = useSelector<StateInterface, RoutersHandlerState>(
     (state) => state.routersHandler
   );
   useEffect(() => {
-    const fetchData = () => {
-      console.log(`CLIENT: Trying to fetch: ${ENDPOINT}`);
-      axios
-        .request<ExtensionType>({
-          url: `${ENDPOINT}/extension`,
-          method: "GET",
-        })
-        .then((data) => {
+    console.log(`CLIENT: Trying to fetch: ${ENDPOINT}`);
+    axios
+      .request<ExtensionType>({
+        url: `${ENDPOINT}/extension`,
+        method: "GET",
+      })
+      .then(({ data }) => {
+        try {
           if (
-            data.data &&
-            Object.prototype.hasOwnProperty.call(data.data, "status") &&
-            data.data.status
+            data &&
+            Object.prototype.hasOwnProperty.call(data, "status") &&
+            data.status
           ) {
             setTimeout(() => {
               dispatch({
                 type: "UPDATE_ROUTER_HANDLER",
                 payload: {
-                  extension: data.data,
+                  extension: data,
                   loaderScreen: false,
                 },
               });
             }, 3000);
           } else throw new Error("invalid data");
-        })
-        .catch(console.error);
-    };
-    fetchData();
+        } catch (e) {
+          dispatch({
+            type: "UPDATE_LOADER_STATE",
+            payload: {
+              troubleMessage: e || "something went worng on API connection",
+            },
+          });
+          console.log(e);
+        }
+      })
+      .catch(console.error);
   }, [dispatch]);
   if (loaderScreen === true) return <Loader />;
   return (
