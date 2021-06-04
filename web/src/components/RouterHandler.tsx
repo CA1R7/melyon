@@ -46,8 +46,8 @@ export interface ExtensionType {
 }
 
 const ENDPOINT: string =
-  process.env.NODE_ENV === "production"
-    ? "https://api.melyon.tech"
+  process.env.NODE_ENV !== "production"
+    ? "https://melyon-server.herokuapp.com"
     : "http://localhost:8080";
 
 export const RouterHandler: FC = (): ReactElement => {
@@ -70,6 +70,8 @@ export const RouterHandler: FC = (): ReactElement => {
             data.status
           ) {
             setTimeout(() => {
+
+              console.log(data);
               dispatch({
                 type: "UPDATE_ROUTER_HANDLER",
                 payload: {
