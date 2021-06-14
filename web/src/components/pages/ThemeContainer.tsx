@@ -135,7 +135,7 @@ export const ThemeContainer: FC<ThemeContainerProps> = ({
   const colorState: ColorType =
     extension.versions[typeof colorTheme !== "undefined" ? colorTheme : 0];
   const chnageColor = (color: number) => {
-    if (extension.versions[color]) {
+    if (extension && extension.versions[color]) {
       dispatch({
         type: "UPDATE_HOME_STATE",
         payload: {
@@ -161,7 +161,7 @@ export const ThemeContainer: FC<ThemeContainerProps> = ({
         <div className="description">A dark theme for visual studio code</div>
 
         <div className="svgs">
-          {extension.badges.map((badge, i) => (
+          {extension && extension.badges.map((badge, i) => (
             <a
               key={i}
               href={`#${badge}`}
@@ -189,7 +189,7 @@ export const ThemeContainer: FC<ThemeContainerProps> = ({
           <div className="left-side">
             <div className="hr"></div>
             <div className="labels">
-              {extension.versions.map((label, i) => (
+              {extension && extension.versions.map((label, i) => (
                 <span
                   key={i}
                   onClick={() => chnageColor(i)}
@@ -208,7 +208,7 @@ export const ThemeContainer: FC<ThemeContainerProps> = ({
             <div className="features">
               <div className="title">Features :</div>
               <ul>
-                {extension.features.map((fueature, i) => (
+                {extension && extension.features.map((fueature, i) => (
                   <li key={i}>{fueature}</li>
                 ))}
               </ul>

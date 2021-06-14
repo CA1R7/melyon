@@ -62,7 +62,7 @@ export const Navbar: FC<NavbarType> = ({ isVisible = true, extension }) => {
     <NavBarStyle id="navbar" isVisible={isVisible}>
       <LogoImage url={staticImage} />
       <Links>
-        {extension.links.map((link, i) => (
+        {extension && extension.links.map((link, i) => (
           <div
             key={i}
             title={link.name}
