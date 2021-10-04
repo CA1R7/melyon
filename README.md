@@ -50,11 +50,6 @@ yarn api
 ---
 ## Make sure you have
   - yarn latest version
-# Servers
-
-| server | default-port | URL local               | URL production            |
-| ------ | ------------ | ----------------------- | ------------------------- |
-| API    | `*:8080`     | `http://localhost:8080` | `https://api.melyon.tech` |
 
 # License
 
